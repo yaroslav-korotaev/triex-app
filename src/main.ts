@@ -7,6 +7,8 @@ import {
   FORMATS,
 } from 'uberlog-format';
 import Ajv from 'ajv';
+import { paramCase } from 'param-case';
+import minimist from 'minimist';
 import {
   Builder,
   inject,
@@ -24,9 +26,15 @@ export type Build<E> = (builder: Builder<Context>) => Builder<Context & E>;
 export type Init<E> = (ctx: Context & E) => Promise<void>;
 
 export function main<E>(build: Build<E>, init: Init<E>): void {
+  const env: Record<string, string> = {};
+  for (const key of Object.keys(process.env)) {
+    env[paramCase(key)] = process.env[key]!;
+  }
+  const args = { ...env, ...minimist(process.argv.slice(2)) };
+  
   const context = inject<Context>(args => {
-    const logLevel = args['logLevel'] as LogLevel || 'trace';
-    const logFormat = args['logFormat'] as LogFormat || 'human';
+    const logLevel = args['log-level'] as LogLevel || 'info';
+    const logFormat = args['log-format'] as LogFormat || 'json';
     const log = new Log({
       level: logLevel,
       format: FORMATS[logFormat](),
@@ -64,8 +72,8 @@ export function main<E>(build: Build<E>, init: Init<E>): void {
       
       const app = new App({
         log: ctx.log,
-        host: 'localhost',
-        port: 3000,
+        host: args['host'] || 'localhost',
+        port: parseInt(args['port'] || '3000', 10),
         remote: ctx.remote,
       });
       
@@ -74,7 +82,7 @@ export function main<E>(build: Build<E>, init: Init<E>): void {
       });
     },
   });
-  
   const exec = app.build();
-  exec({}).catch(err => console.error(err));
+  
+  exec(args).catch(err => console.error(err));
 }

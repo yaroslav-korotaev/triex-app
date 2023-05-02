@@ -1,7 +1,7 @@
 import { route } from '../route';
 
 export const process = route(options => ({
-  method: 'post',
+  method: 'POST',
   path: '/streams/:stream/process',
   handler: async ctx => {
     const stream = options.remote.stream.get(ctx.params['stream']);

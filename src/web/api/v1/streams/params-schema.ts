@@ -1,14 +1,14 @@
 import { route } from '../route';
 
-export const hints = route(options => ({
-  method: 'post',
-  path: '/streams/:stream/hints',
+export const paramsSchema = route(options => ({
+  method: 'POST',
+  path: '/streams/:stream/params/schema',
   handler: async ctx => {
     const stream = options.remote.stream.get(ctx.params['stream']);
     if (!stream) {
       throw new Error('stream not found');
     }
     
-    return await stream.hints(ctx.body)
+    return stream.paramsSchema(ctx.body);
   },
 }));
