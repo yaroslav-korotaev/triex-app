@@ -32,9 +32,10 @@ export function createApi(routes: Route[], options: CreateApiOptions): Koa.Middl
         
         ctx.status = 500;
         ctx.body = {
+          // TODO: better error serialization
           error: {
-            ...error,
-            message: error.message,
+            ...(error as Error),
+            message: (error as Error).message,
           },
         };
       }
