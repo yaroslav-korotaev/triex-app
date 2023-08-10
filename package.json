@@ -1,6 +1,6 @@
 {
   "name": "triex-app",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "",
   "keywords": [],
   "bugs": "https://github.com/yaroslav-korotaev/triex-app/issues",
@@ -25,9 +25,9 @@
     "miniclee": "^0.1.0",
     "minimist": "^1.2.8",
     "param-case": "^3.0.4",
-    "triex-factory": "^0.7.0",
-    "triex-remote": "^0.7.0",
-    "triex-types": "^0.7.0",
+    "triex-factory": "^0.8.0",
+    "triex-remote": "^0.8.0",
+    "triex-types": "^0.8.0",
     "uberlog": "^0.1.1",
     "uberlog-format": "^0.1.0",
     "universe-types": "^0.2.0"
