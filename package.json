@@ -25,9 +25,9 @@
     "miniclee": "^0.1.0",
     "minimist": "^1.2.8",
     "param-case": "^3.0.4",
-    "triex-factory": "^0.9.0",
-    "triex-remote": "^0.9.0",
-    "triex-types": "^0.9.0",
+    "triex-factory": "^0.10.0",
+    "triex-remote": "^0.10.0",
+    "triex-types": "^0.10.0",
     "uberlog": "^0.1.1",
     "uberlog-format": "^0.1.0",
     "universe-types": "^0.2.0"
